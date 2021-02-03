@@ -1,4 +1,5 @@
 # SPDX-FileCopyrightText: 2019 Carter Nelson for Adafruit Industries
+# SPDX-FileCopyrightText: 2021 John Furcean
 #
 # SPDX-License-Identifier: MIT
 

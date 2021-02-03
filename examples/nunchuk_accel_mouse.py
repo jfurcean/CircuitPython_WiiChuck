@@ -4,7 +4,7 @@
 import board
 import usb_hid
 from adafruit_hid.mouse import Mouse
-from adafruit_nunchuk.nunchuk import Nunchuk
+from wiichuck.nunchuk import Nunchuk
 
 m = Mouse(usb_hid.devices)
 nc = Nunchuk(board.I2C())

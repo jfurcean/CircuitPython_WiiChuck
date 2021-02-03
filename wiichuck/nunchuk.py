@@ -1,4 +1,5 @@
 # SPDX-FileCopyrightText: 2019 Carter Nelson for Adafruit Industries
+# SPDX-FileCopyrightText: 2021 John Furcean
 #
 # SPDX-License-Identifier: MIT
 
@@ -27,7 +28,7 @@ Implementation Notes
 * Adafruit's Bus Device library: https://github.com/adafruit/Adafruit_CircuitPython_BusDevice
 """
 from collections import namedtuple
-from adafruit_nunchuk import NunchukBase
+from wiichuck import WiiChuckBase
 
 __version__ = "0.0.0-auto.0"
 __repo__ = "https://github.com/adafruit/Adafruit_CircuitPython_Nunchuk.git"

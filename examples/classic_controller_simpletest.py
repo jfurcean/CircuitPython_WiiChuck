@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: MIT
 
 import board
-from adafruit_nunchuk.classic_controller import ClassicController
+from wiichuck.classic_controller import ClassicController
 
 controller = ClassicController(board.I2C())
 
