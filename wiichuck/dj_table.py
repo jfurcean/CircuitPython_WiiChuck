@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: MIT
 
 """
-`wiichuck.classic_controller`
+`wiichuck.dj_table`
 ================================================================================
 
 CircuitPython driver for Nintento WiiMote I2C Accessory Devices
@@ -32,7 +32,7 @@ __version__ = "0.0.0-auto.0"
 __repo__ = "https://github.com/adafruit/Adafruit_CircuitPython_Nunchuk.git"
 
 
-class ClassicController(WiiChuckBase):
+class DJTable(WiiChuckBase):
     """
     Class which provides interface to Nintendo Wii Classic Controller.
 
@@ -46,28 +46,22 @@ class ClassicController(WiiChuckBase):
     :type i2c_read_delay: float, optional
     """
 
-    _Values = namedtuple("Values", ("joysticks", "buttons", "dpad", "triggers"))
-    _Joysticks = namedtuple("Joysticks", ("rx", "ry", "lx", "ly"))
+    _Values = namedtuple(
+        "Values", ("joystick", "buttons", "turntables", "dial", "slider")
+    )
+    _Joystick = namedtuple("Joysticks", ("x", "y"))
     _Buttons = namedtuple(
         "Buttons",
         (
-            "A",
-            "B",
-            "X",
-            "Y",
-            "R",
-            "L",
-            "ZR",
-            "ZL",
+            "euphoria",
             "start",
             "select",
-            "home",
             "plus",
             "minus",
         ),
     )
-    _Dpad = namedtuple("Dpad", ("up", "down", "right", "left"))
-    _Triggers = namedtuple("Trigers", ("right", "left"))
+    _Turntables = namedtuple("Turntables", ("right", "left"))
+    _Turntable = namedtuple("Turntable", ("value", "green", "red", "blue"))
 
     def __init__(self, i2c, address=0x52, i2c_read_delay=0.002):
         super().__init__(i2c, address=address, i2c_read_delay=i2c_read_delay)
@@ -77,16 +71,17 @@ class ClassicController(WiiChuckBase):
         """The current state of all values."""
         self._read_data()
         return self._Values(
-            self._joysticks(do_read=False),
+            self._joystick(do_read=False),
             self._buttons(do_read=False),
-            self._dpad(do_read=False),
-            self._triggers(do_read=False),
+            self._turntables(do_read=False),
+            self._dial(do_read=False),
+            self._slider(do_read=False),
         )
 
     @property
-    def joysticks(self):
-        """The current joysticks positions."""
-        return self._joysticks()
+    def joystick(self):
+        """The current joystick positions."""
+        return self._joystick()
 
     @property
     def buttons(self):
@@ -94,62 +89,74 @@ class ClassicController(WiiChuckBase):
         return self._buttons()
 
     @property
-    def dpad(self):
+    def turntables(self):
         """The current pressed state of the dpad."""
-        return self._dpad()
+        return self._turntables()
 
     @property
-    def triggers(self):
+    def dial(self):
         """The current accelerometer reading."""
-        return self._triggers()
+        return self._dial()
 
-    def _joysticks(self, do_read=True):
+    @property
+    def slider(self):
+        """The current accelerometer reading."""
+        return self._slider()
+
+    def _joystick(self, do_read=True):
         if do_read:
             self._read_data()
-        return self._Joysticks(
-            (
-                (self.buffer[0] & 0xC0) >> 3
-                | (self.buffer[1] & 0xC0) >> 5
-                | (self.buffer[2] & 0x80) >> 7
-            ),  # rx
-            self.buffer[2] & 0x1F,  # ry
-            self.buffer[0] & 0x3F,  # lx
-            self.buffer[1] & 0x3F,  # ly
+        return self._Joystick(
+            self.buffer[0] & 0x3F,
+            self.buffer[1] & 0x3F,
         )
 
     def _buttons(self, do_read=True):
         if do_read:
             self._read_data()
         return self._Buttons(
-            not bool(self.buffer[5] & 0x10),  # A
-            not bool(self.buffer[5] & 0x40),  # B
-            not bool(self.buffer[5] & 0x8),  # X
-            not bool(self.buffer[5] & 0x20),  # Y
-            not bool(self.buffer[4] & 0x2),  # R
-            not bool(self.buffer[4] & 0x20),  # L
-            not bool(self.buffer[5] & 0x4),  # ZR
-            not bool(self.buffer[5] & 0x80),  # ZL
+            not bool(self.buffer[5] & 0x10),  # euphoria
             not bool(self.buffer[4] & 0x4),  # start
             not bool(self.buffer[4] & 0x10),  # select
-            not bool(self.buffer[4] & 0x8),  # home
             not bool(self.buffer[4] & 0x4),  # plus
             not bool(self.buffer[4] & 0x10),  # minus
         )
 
-    def _dpad(self, do_read=True):
+    def _turntables(self, do_read=True):
         if do_read:
             self._read_data()
-        return self._Dpad(
-            not bool(self.buffer[5] & 0x1),  # UP
-            not bool(self.buffer[4] & 0x40),  # DOWN
-            not bool(self.buffer[4] & 0x80),  # RIGHT
-            not bool(self.buffer[5] & 0x2),  # LEFT
+
+        rtt = (self.buffer[0] & 0xC0) >> 3
+        rtt |= (self.buffer[1] & 0xC0) >> 5
+        rtt |= (self.buffer[2] & 0x80) >> 7
+        if self.buffer[2] & 0x1:
+            rtt = rtt * -1
+
+        ltt = self.buffer[3] & 0x1F
+        if self.buffer[4] & 0x1:
+            ltt = ltt * -1
+
+        return self._Turntables(
+            self._Turntable(
+                rtt,
+                not bool(self.buffer[5] & 0x20),  # green
+                not bool(self.buffer[4] & 0x2),  # red
+                not bool(self.buffer[5] & 0x4),  # blue
+            ),
+            self._Turntable(
+                ltt,
+                not bool(self.buffer[5] & 0x8),  # green
+                not bool(self.buffer[4] & 0x20),  # red
+                not bool(self.buffer[5] & 0x80),  # blue
+            ),
         )
 
-    def _triggers(self, do_read=True):
+    def _dial(self, do_read=True):
         if do_read:
             self._read_data()
-        return self._Triggers(
-            self.buffer[3] & 0x1F,  # right
-            (self.buffer[2] & 0x60) >> 2 | (self.buffer[3] & 0xE0) >> 5,  # left
-        )
+        return ((self.buffer[2] & 0x60) >> 2) | ((self.buffer[3] & 0xE0) >> 5)
+
+    def _slider(self, do_read=True):
+        if do_read:
+            self._read_data()
+        return (self.buffer[2] & 0x1E) >> 1
