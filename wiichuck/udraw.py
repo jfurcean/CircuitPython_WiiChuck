@@ -85,7 +85,7 @@ class UDraw(WiiChuckBase):
             self._read_data()
         return self._Position(
             ((self.buffer[2] & 0x0F) << 8 | self.buffer[0]),  # x
-            ((self.buffer[2] & 0xF0) << 4 | self.buffer[1])   # y
+            ((self.buffer[2] & 0xF0) << 4 | self.buffer[1]),  # y
         )
 
     def _buttons(self, do_read=True):
@@ -94,7 +94,7 @@ class UDraw(WiiChuckBase):
         return self._Buttons(
             bool((self.buffer[5] & 0x04) >> 2),  # tip
             not bool((self.buffer[5] & 0x02) >> 1),  # C
-            not bool(self.buffer[5] & 0x01)  # Z
+            not bool(self.buffer[5] & 0x01),  # Z
         )
 
     def _pressure(self, do_read=True):
