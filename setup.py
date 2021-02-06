@@ -23,17 +23,17 @@ with open(path.join(here, "README.rst"), encoding="utf-8") as f:
     long_description = f.read()
 
 setup(
-    name="adafruit-circuitpython-wiichuck",
+    name="circuitpython-wiichuck",
     use_scm_version=True,
     setup_requires=["setuptools_scm"],
     description="CircuitPython driver for Nintento WiiMote I2C Accessory Devices",
     long_description=long_description,
     long_description_content_type="text/x-rst",
     # The project's main homepage.
-    url="https://github.com/adafruit/Adafruit_CircuitPython_WiiChuck",
+    url="https://github.com/jfurcean/CircuitPython_WiiChuck",
     # Author details
-    author="Adafruit Industries",
-    author_email="circuitpython@adafruit.com",
+    author="John Furcean",
+    author_email="john@furcean.com",
     install_requires=[
         "Adafruit-Blinka",
         "adafruit-circuitpython-busdevice",
@@ -58,5 +58,5 @@ setup(
     # simple. Or you can use find_packages().
     # TODO: IF LIBRARY FILES ARE A PACKAGE FOLDER,
     #       CHANGE `py_modules=['...']` TO `packages=['...']`
-    py_modules=["wiichuck"],
+    packages=["wiichuck"],
 )
