@@ -10,7 +10,7 @@ from wiichuck.classic_controller import ClassicController
 controller = ClassicController(board.I2C())
 
 while True:
-    joysticks, buttons, dpad, triggers = controller.values
+    _, buttons, dpad, _ = controller.values
 
     if buttons.A:
         print("button A")
