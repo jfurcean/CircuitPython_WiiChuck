@@ -49,7 +49,9 @@ while True:
         oldy = position.y
         continue
 
-    if (position.x != oldx) or (position.y != oldy):  # PEN has moved we move the HID mouse
+    if (position.x != oldx) or (
+        position.y != oldy
+    ):  # PEN has moved we move the HID mouse
         m.move((position.x - oldx), (oldy - position.y), 0)
         oldx = position.x
         oldy = position.y
