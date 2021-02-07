@@ -21,7 +21,7 @@ while True:
     # Classic Controler Pro as no potentiometer and only report 0 or 31
     if (triggers.left, triggers.right) != (0, 0):
         print("Trigger left and right = {},{}".format(triggers.left, triggers.right))
-        
+
     if buttons.A:
         print("button A")
     if buttons.B:

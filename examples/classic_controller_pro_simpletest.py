@@ -7,7 +7,7 @@ from wiichuck.classic_controller import ClassicController
 controller = ClassicController(board.I2C())
 
 while True:
-    # Classic Controller Pro has no trigger/potentiometer and only use L and R 
+    # Classic Controller Pro has no trigger/potentiometer and only use L and R
     joysticks, buttons, dpad, _ = controller.values
 
     # center for the right joystick is (16,16)
