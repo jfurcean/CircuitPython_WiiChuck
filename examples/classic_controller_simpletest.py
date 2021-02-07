@@ -17,6 +17,11 @@ while True:
     if (joysticks.lx, joysticks.ly) != (32, 32):
         print("Left joystick = {},{}".format(joysticks.lx, joysticks.ly))
 
+    # triggers when not pressed is at (0,0)
+    # Classic Controler Pro as no potentiometer and only report 0 or 31
+    if (triggers.left, triggers.right) != (0, 0):
+        print("Trigger left and right = {},{}".format(triggers.left, triggers.right))
+        
     if buttons.A:
         print("button A")
     if buttons.B:
