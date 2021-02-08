@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: MIT
 
 """
-`wiichuck.nunchuck`
+`wiichuck.nunchuk`
 ================================================================================
 
 CircuitPython driver for Nintento WiiMote I2C Accessory Devices

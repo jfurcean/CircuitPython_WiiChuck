@@ -6,3 +6,18 @@
 
 .. automodule:: wiichuck
    :members:
+
+.. automodule:: wiichuck.classic_controller
+   :members:
+
+.. automodule:: wiichuck.nunchuk
+   :members:
+
+.. automodule:: wiichuck.dj_table
+   :members:
+
+.. automodule:: wiichuck.guitar
+   :members:
+
+.. automodule:: wiichuck.udraw
+   :members:

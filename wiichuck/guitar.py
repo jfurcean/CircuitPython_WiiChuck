@@ -83,7 +83,7 @@ class Guitar(WiiChuckBase):
 
     @property
     def joystick(self):
-        """The current joystick positions."""
+        """The current joystick position."""
         return self._joystick()
 
     @property
@@ -93,17 +93,17 @@ class Guitar(WiiChuckBase):
 
     @property
     def strum(self):
-        """The current pressed state of the dpad."""
+        """The current pressed state of strum.up and strum.down."""
         return self._strum()
 
     @property
     def whammy(self):
-        """The current accelerometer reading."""
+        """The current whammy position."""
         return self._whammy()
 
     @property
     def touchbar(self):
-        """The current accelerometer reading."""
+        """The current touchbar position. Only available in the Guitar Hero World Tour Guitars"""
         return self._touchbar()
 
     def _joystick(self, do_read=True):

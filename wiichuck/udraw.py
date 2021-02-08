@@ -67,7 +67,7 @@ class UDraw(WiiChuckBase):
 
     @property
     def position(self):
-        """The current joystick position."""
+        """The current pen tip position."""
         return self._position()
 
     @property
@@ -77,7 +77,7 @@ class UDraw(WiiChuckBase):
 
     @property
     def pressure(self):
-        """The current accelerometer reading."""
+        """The current pressure reading."""
         return self._pressure()
 
     def _position(self, do_read=True):

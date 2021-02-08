@@ -80,27 +80,27 @@ class DJTable(WiiChuckBase):
 
     @property
     def joystick(self):
-        """The current joystick positions."""
+        """The current joystick position."""
         return self._joystick()
 
     @property
     def buttons(self):
-        """The current pressed state of all buttons."""
+        """The current pressed state of all buttons that are not on the turntable."""
         return self._buttons()
 
     @property
     def turntables(self):
-        """The current pressed state of the dpad."""
+        """The current reading from the turntable and it's buttons."""
         return self._turntables()
 
     @property
     def dial(self):
-        """The current accelerometer reading."""
+        """The current dial position."""
         return self._dial()
 
     @property
     def slider(self):
-        """The current accelerometer reading."""
+        """The current slider position."""
         return self._slider()
 
     def _joystick(self, do_read=True):
