@@ -8,6 +8,7 @@
    :members:
 
 .. automodule:: wiichuck.classic_controller
+   :show-inheritance:
    :members:
 
 .. automodule:: wiichuck.nunchuk
@@ -20,4 +21,7 @@
    :members:
 
 .. automodule:: wiichuck.udraw
+   :members:
+
+.. automodule:: wiichuck.snes_8bitdo
    :members:
