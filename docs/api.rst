@@ -22,6 +22,3 @@
 
 .. automodule:: wiichuck.udraw
    :members:
-
-.. automodule:: wiichuck.snes_8bitdo
-   :members:
