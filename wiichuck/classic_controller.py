@@ -32,6 +32,9 @@ __version__ = "0.0.0-auto.0"
 __repo__ = "https://github.com/adafruit/Adafruit_CircuitPython_Nunchuk.git"
 
 
+_THIRD_PARTY_SIGNATURE = bytearray((0x00, 0x00))
+
+
 class ClassicController(WiiChuckBase):
     """
     Class which provides interface to Nintendo Wii Classic Controller.
@@ -153,3 +156,27 @@ class ClassicController(WiiChuckBase):
             self.buffer[3] & 0x1F,  # right
             (self.buffer[2] & 0x60) >> 2 | (self.buffer[3] & 0xE0) >> 5,  # left
         )
+
+    def _read_data(self):
+        """Overides the ``_read_data()`` function.
+
+        Checks to see if the data looks like it is comming from a thrid party remote
+        and modifies it.
+        """
+
+        super()._read_data()
+
+        if self._check_third_party():
+            self.buffer[4] = self.buffer[6]
+            self.buffer[5] = self.buffer[7]
+        return self.buffer
+
+    def _check_third_party(self):
+        """Checks if it is a thrid party controller.
+
+        Some third party NES/SNES devices do not work properly with decryption enabled and the
+        correct button information is stored in bytes 7 and 8. All ones are stored in
+        bytes 4 and 5. Therefore, if the data in bytes 4 and 5 look like all buttons are
+        pressed (all 0s), then it is safe to assume this is a thrid party remote.
+        """
+        return self.buffer[4:6] == _THIRD_PARTY_SIGNATURE

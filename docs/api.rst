@@ -8,6 +8,7 @@
    :members:
 
 .. automodule:: wiichuck.classic_controller
+   :show-inheritance:
    :members:
 
 .. automodule:: wiichuck.nunchuk
