@@ -103,7 +103,7 @@ class ClassicController(WiiChuckBase):
 
     @property
     def triggers(self):
-        """The current readding from the triggers (0-31 for Pro) (0 or 31 non-Pro)."""
+        """The current readding from the triggers (0-31 for non-Pro) (0 or 31 Pro)."""
         return self._triggers()
 
     def _joysticks(self, do_read=True):
