@@ -6,7 +6,7 @@
 `wiichuck.guitar`
 ================================================================================
 
-CircuitPython driver for Nintento WiiMote I2C Accessory Devices
+CircuitPython driver for Guitar Hero Wii Guitar I2C Accessory Devices
 
 
 * Author(s): John Furcean
