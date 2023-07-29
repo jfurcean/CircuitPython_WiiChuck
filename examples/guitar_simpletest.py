@@ -7,7 +7,6 @@ from wiichuck.guitar import Guitar
 guitar = Guitar(board.I2C())
 
 while True:
-
     joystic, buttons, strum, whammy, touchbar = guitar.values
 
     # Joystick: (0-63,0-63), middle is (32,32)
