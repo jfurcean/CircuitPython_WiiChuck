@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: Copyright (c) 2023 David Glaude + 2021 John Furcean (for Guitar original code)
+# SPDX-FileCopyrightText: Copyright (c) 2023 David Glaude + 2021 John Furcean
 #
 # SPDX-License-Identifier: MIT
 

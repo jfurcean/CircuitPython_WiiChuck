@@ -38,7 +38,7 @@ Bass
 **Not implemented yet**
 * "Softness" is how hard or soft you hit the pad. It ranges from 0 = Very hard to 6 = very soft,
 #  with 7 = not hit at all == bits 7+6+5 of byte 3
-* "HHP" is 0 if the velocity data is for the hi-hat pedal (unmarked 3.5mm jack above bass pedal jack),
+* "HHP" is 0 if the velocity data is for the hi-hat pedal (unmarked jack above bass pedal jack),
 #  and 1 otherwise.
 * "Which" (another way to identify the presence or origin of the velocity data?)
 
