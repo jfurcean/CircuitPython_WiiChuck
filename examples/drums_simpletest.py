@@ -8,7 +8,6 @@ from wiichuck.drums import Drums
 drums = Drums(board.I2C())
 
 while True:
-
     joystic, buttons = drums.values
 
     # Joystick: (0-63,0-63), middle is (32,32)
