@@ -7,7 +7,6 @@ from wiichuck.dj_table import DJTable
 dj = DJTable(board.I2C())
 
 while True:
-
     joystick, buttons, turntables, dial, slider = dj.values
 
     # Joystick
